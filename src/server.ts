@@ -1,19 +1,22 @@
 import mealRoutes from "@/Infrastructure/Routes/meal/meal.routes"
+import * as dotenv from "dotenv"
 import express, { Express } from "express"
 import http from "http"
 import morgan from "morgan"
+import { StatusCode } from "status-code-enum"
 
-const router: Express = express()
+dotenv.config()
+
+const app: Express = express()
 
 /* Logging */
-router.use(morgan("dev"))
+if (process.env.NODE_ENV === "development") app.use(morgan("dev"))
 /* Parse the request */
-router.use(express.urlencoded({ extended: false }))
-/* Takes care of JSON data */
-router.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
-/* RULES OF OUR API */
-router.use((req, res, next) => {
+/* Api rules */
+app.use((req, res, next) => {
   // set the CORS policy
   res.header("Access-Control-Allow-Origin", "*")
   // set the CORS headers
@@ -24,25 +27,25 @@ router.use((req, res, next) => {
   // set the CORS method headers
   if (req.method === "OPTIONS") {
     res.header("Access-Control-Allow-Methods", "GET PATCH DELETE POST")
-    return res.status(200).json({})
+    return res.status(StatusCode.SuccessOK).json({})
   }
   next()
 })
 
 /* Routes */
-router.use("/meals", mealRoutes)
+app.use("/meals", mealRoutes)
 
 /* Error handling */
-router.use((req, res, next) => {
+app.use((req, res, next) => {
   const error = new Error("not found")
-  return res.status(404).json({
+  return res.status(StatusCode.ClientErrorNotFound).json({
     message: error.message,
   })
 })
 
 /* Server */
-const httpServer = http.createServer(router)
-const PORT: any = process.env.PORT ?? 5000
+const httpServer = http.createServer(app)
+const PORT: any = process.env.SERVER_PORT ?? 5000
 httpServer.listen(PORT, () =>
   console.log(`The server is running on port ${PORT}`)
 )

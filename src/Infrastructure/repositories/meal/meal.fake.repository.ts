@@ -8,8 +8,11 @@ export default class MealFakeRepository implements MealRepositoryInterface {
     return mealData
   }
   // get a meal
-  async getMeal(id: string): Promise<MealInterface | null> {
-    return mealData.find((meal) => meal.id === id) ?? null
+  async getMeal(id: string): Promise<MealInterface> {
+    if (!mealData.find((meal) => meal.id === id)) {
+      throw new Error("Meal not found")
+    }
+    return mealData.find((meal) => meal.id === id) as MealInterface
   }
   // update a meal
   async updateMeal(id: string, meal: MealInterface): Promise<MealInterface> {

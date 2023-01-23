@@ -5,9 +5,7 @@
     "description": "This is the first meal",
     "price": 10.00,
     "image": "https://www.example.com/meal1.jpg",
-    "chef_id": "1",
-    "createdAt": "2019-01-01T00:00:00.000Z",
-    "updatedAt": "2019-01-01T00:00:00.000Z"
+    "chef_id": "1"
   },
   {
     "id": "2",
@@ -15,9 +13,7 @@
     "description": "This is the second meal",
     "price": 20.00,
     "image": "https://www.example.com/meal2.jpg",
-    "chef_id": "1",
-    "createdAt": "2019-01-01T00:00:00.000Z",
-    "updatedAt": "2019-01-01T00:00:00.000Z"
+    "chef_id": "1"
   },
   {
     "id": "3",
@@ -25,9 +21,7 @@
     "description": "This is the third meal",
     "price": 30.00,
     "image": "https://www.example.com/meal3.jpg",
-    "chef_id": "1",
-    "createdAt": "2019-01-01T00:00:00.000Z",
-    "updatedAt": "2019-01-01T00:00:00.000Z"
+    "chef_id": "1"
   },
   {
     "id": "4",
@@ -35,9 +29,7 @@
     "description": "This is the fourth meal",
     "price": 40.00,
     "image": "https://www.example.com/meal4.jpg",
-    "chef_id": "1",
-    "createdAt": "2019-01-01T00:00:00.000Z",
-    "updatedAt": "2019-01-01T00:00:00.000Z"
+    "chef_id": "1"
   },
   {
     "id": "5",
@@ -45,9 +37,7 @@
     "description": "This is the fifth meal",
     "price": 50.00,
     "image": "https://www.example.com/meal5.jpg",
-    "chef_id": "1",
-    "createdAt": "2019-01-01T00:00:00.000Z",
-    "updatedAt": "2019-01-01T00:00:00.000Z"
+    "chef_id": "1"
   },
   {
     "id": "6",
@@ -55,9 +45,7 @@
     "description": "This is the sixth meal",
     "price": 60.00,
     "image": "https://www.example.com/meal6.jpg",
-    "chef_id": "1",
-    "createdAt": "2019-01-01T00:00:00.000Z",
-    "updatedAt": "2019-01-01T00:00:00.000Z"
+    "chef_id": "1"
   },
   {
     "id": "7",
@@ -65,9 +53,7 @@
     "description": "This is the seventh meal",
     "price": 70.00,
     "image": "https://www.example.com/meal7.jpg",
-    "chef_id": "1",
-    "createdAt": "2019-01-01T00:00:00.000Z",
-    "updatedAt": "2019-01-01T00:00:00.000Z"
+    "chef_id": "1"
   },
   {
     "id": "8",
@@ -75,9 +61,7 @@
     "description": "This is the eighth meal",
     "price": 80.00,
     "image": "https://www.example.com/meal8.jpg",
-    "chef_id": "1",
-    "createdAt": "2019-01-01T00:00:00.000Z",
-    "updatedAt": "2019-01-01T00:00:00.000Z"
+    "chef_id": "1"
   },
   {
     "id": "9",
@@ -85,9 +69,7 @@
     "description": "This is the ninth meal",
     "price": 90.00,
     "image": "https://www.example.com/meal9.jpg",
-    "chef_id": "1",
-    "createdAt": "2019-01-01T00:00:00.000Z",
-    "updatedAt": "2019-01-01T00:00:00.000Z"
+    "chef_id": "1"
   },
   {
     "id": "10",
@@ -95,8 +77,6 @@
     "description": "This is the tenth meal",
     "price": 100.00,
     "image": "https://www.example.com/meal10.jpg",
-    "chef_id": "1",
-    "createdAt": "2019-01-01T00:00:00.000Z",
-    "updatedAt": "2019-01-01T00:00:00.000Z"
+    "chef_id": "1"
   }
 ]

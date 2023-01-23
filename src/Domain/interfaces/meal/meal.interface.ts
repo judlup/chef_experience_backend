@@ -5,6 +5,7 @@ export interface MealInterface {
   price: number
   image: string
   chef_id: string
-  createdAt: string
-  updatedAt: string
+  status?: boolean
+  createdAt?: Date
+  updatedAt?: Date
 }
