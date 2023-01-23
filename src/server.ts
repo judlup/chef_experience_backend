@@ -1,4 +1,5 @@
 import mealRoutes from "@/Infrastructure/Routes/meal/meal.routes"
+import userRoutes from "@/Infrastructure/Routes/user/user.routes"
 import * as dotenv from "dotenv"
 import express, { Express } from "express"
 import http from "http"
@@ -34,6 +35,7 @@ app.use((req, res, next) => {
 
 /* Routes */
 app.use("/meals", mealRoutes)
+app.use("/users", userRoutes)
 
 /* Error handling */
 app.use((req, res, next) => {

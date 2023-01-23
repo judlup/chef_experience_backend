@@ -36,7 +36,7 @@ export default class MealController implements MealControllerInterface {
     const meal: MealInterface = req.body
     const addMealUseCase = new AddMealsUseCase(mealRepository)
     const newMeal = await addMealUseCase.execute(meal)
-    return res.status(StatusCode.SuccessOK).json({
+    return res.status(StatusCode.SuccessCreated).json({
       data: newMeal,
     })
   }
