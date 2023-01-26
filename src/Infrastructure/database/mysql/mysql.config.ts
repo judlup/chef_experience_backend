@@ -1,3 +1,5 @@
+import { Meal } from "@/Domain/entities/meal/meal.entity"
+import { User } from "@/Domain/entities/user/user.entity"
 import * as dotenv from "dotenv"
 import { DataSource } from "typeorm"
 
@@ -10,18 +12,18 @@ const dataSource = new DataSource({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: ["./src/Domain/entities/**/*.ts"],
+  entities: [
+    "src/modules/**/*.entity.{ts,js}",
+    "dist/module/**/*.entity{.ts,.js}",
+    Meal,
+    User,
+  ],
   logging: false,
   synchronize: true,
 })
 
-dataSource
-  .initialize()
-  .then(() => {
-    console.log("Database connected")
-  })
-  .catch((error) => {
-    console.log("Database connection error: ", error)
-  })
+dataSource.initialize().catch((error) => {
+  console.log("Database connection error: ", error)
+})
 
 export default dataSource
