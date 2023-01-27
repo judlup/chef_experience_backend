@@ -1,5 +1,4 @@
 import { UserRole } from "@/Domain/enums/user/user.enum"
-import { MealInterface } from "@/Domain/interfaces/meal/meal.interface"
 import { UserInterface } from "@/Domain/interfaces/user/user.interface"
 import bcrypt from "bcryptjs"
 import {
@@ -8,13 +7,11 @@ import {
   CreateDateColumn,
   Entity,
   Index,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm"
-import { Meal } from "../meal/meal.entity"
 
-@Entity("users")
+@Entity()
 export class User implements UserInterface {
   @PrimaryGeneratedColumn("uuid")
   id!: string
@@ -41,9 +38,6 @@ export class User implements UserInterface {
 
   @UpdateDateColumn()
   updatedAt!: Date
-
-  @OneToMany(() => Meal, (meal) => meal.chef_id)
-  meals!: MealInterface[]
 
   @BeforeInsert()
   async hashPassword() {

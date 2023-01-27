@@ -3,11 +3,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm"
+import { Rating } from "../rating/rating.entity"
 
-@Entity("meals")
+@Entity()
 export class Meal implements MealInterface {
   @PrimaryGeneratedColumn("uuid")
   id!: string
@@ -35,4 +38,15 @@ export class Meal implements MealInterface {
 
   @UpdateDateColumn()
   updatedAt!: Date
+
+  @ManyToMany(() => Rating, (rating) => rating.mealId, { cascade: true })
+  @JoinTable({ name: "ratings" })
+  ratings!: Rating[]
+
+  async addRating(rating: Rating) {
+    if (this.ratings == null) {
+      this.ratings = new Array<Rating>()
+    }
+    this.ratings.push(rating)
+  }
 }

@@ -9,14 +9,17 @@ export default class MealRepository implements MealRepositoryInterface {
   async getMeals(): Promise<MealInterface[]> {
     const meals = await dataSource
       .getRepository(Meal)
-      .find({ where: { status: true } })
+      .find({ where: { status: true }, relations: ["ratings", "ratings.user"] })
     return meals
   }
   // get a meal
   async getMeal(id: string): Promise<MealInterface> {
     const meal = await dataSource
       .getRepository(Meal)
-      .findOne({ where: { id: id, status: true } })
+      .findOne({
+        where: { id: id, status: true },
+        relations: ["ratings", "ratings.user"],
+      })
     if (!meal) {
       throw new Error("Meal not found")
     }

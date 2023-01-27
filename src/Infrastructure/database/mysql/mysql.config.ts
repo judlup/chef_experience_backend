@@ -1,4 +1,5 @@
 import { Meal } from "@/Domain/entities/meal/meal.entity"
+import { Rating } from "@/Domain/entities/rating/rating.entity"
 import { User } from "@/Domain/entities/user/user.entity"
 import * as dotenv from "dotenv"
 import { DataSource } from "typeorm"
@@ -17,6 +18,7 @@ const dataSource = new DataSource({
     "dist/module/**/*.entity{.ts,.js}",
     Meal,
     User,
+    Rating,
   ],
   logging: false,
   synchronize: true,
