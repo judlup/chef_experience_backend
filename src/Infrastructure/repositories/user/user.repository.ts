@@ -2,6 +2,7 @@ import { User } from "@/Domain/entities/user/user.entity"
 import { UserInterface } from "@/Domain/interfaces/user/user.interface"
 import { UserRepositoryInterface } from "@/Domain/repositories/user/meal.repository.interface"
 import dataSource from "@/Infrastructure/database/mysql/mysql.config"
+import JwtUtil from "@/Infrastructure/utils/jwt/jwt.util"
 import { uuid } from "uuidv4"
 
 export default class UserRepository implements UserRepositoryInterface {
@@ -73,7 +74,9 @@ export default class UserRepository implements UserRepositoryInterface {
     if (!isMatch) {
       throw new Error("Incorrect password")
     }
-    const token = uuid()
+
+    const jwtUtil = new JwtUtil()
+    const token = await jwtUtil.sign(user)
 
     return { token: token }
   }

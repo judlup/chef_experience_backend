@@ -57,4 +57,11 @@ export default class MealRepository implements MealRepositoryInterface {
     const results = await dataSource.getRepository(Meal).save(newMeal)
     return results
   }
+  // get a meal by chef
+  async getMealsByChefId(chefId: string): Promise<MealInterface[]> {
+    const meals = await dataSource
+      .getRepository(Meal)
+      .find({ where: { chef_id: chefId, status: true } })
+    return meals
+  }
 }

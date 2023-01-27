@@ -32,4 +32,8 @@ export default class MealFakeRepository implements MealRepositoryInterface {
     mealData.push(meal)
     return meal
   }
+  // get a meal by chef
+  async getMealsByChefId(chefId: string): Promise<MealInterface[]> {
+    return mealData.filter((meal) => meal.chef_id === chefId)
+  }
 }

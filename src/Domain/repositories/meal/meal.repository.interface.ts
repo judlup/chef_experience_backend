@@ -6,4 +6,5 @@ export interface MealRepositoryInterface {
   updateMeal(id: string, meal: MealInterface): Promise<MealInterface>
   deleteMeal(id: string): Promise<MealInterface>
   addMeal(meal: MealInterface): Promise<MealInterface>
+  getMealsByChefId(chefId: string): Promise<MealInterface[]>
 }
