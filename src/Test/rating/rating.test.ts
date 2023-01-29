@@ -4,25 +4,28 @@ dotenv.config()
 
 let token: string
 const userId: string = process.env.TEST_USER_ID || ""
+const mealId: string = process.env.TEST_MEAL_ID || ""
 const username: string = process.env.TEST_USERNAME || ""
 const password: string = process.env.TEST_PASSWORD || ""
 
-describe("User test", () => {
+describe("Rating test", () => {
   beforeAll(async () => {
     token = await getToken(username, password)
     expect(typeof token).toBe("string")
   })
 
-  test("User info | Get /users/:id", async () => {
+  test("Rating a meal | Post /ratings", async () => {
     const res = await makeRequest(
-      "GET",
-      `http://localhost:${process.env.SERVER_PORT}/users/${userId}`,
-      {},
+      "POST",
+      `http://localhost:${process.env.SERVER_PORT}/ratings`,
+      {
+        userId: userId,
+        mealId: mealId,
+        rating: Math.floor(Math.random() * 5 + 1),
+      },
       token
     )
-    expect(res.data).toHaveProperty("id")
-    expect(res.data).toHaveProperty("username")
-    expect(res.data).toHaveProperty("role")
-    expect(res.data).not.toHaveProperty("password")
+    expect(res.message).toBe("Rating added successfully")
+    expect(res.success).toBe(true)
   })
 })

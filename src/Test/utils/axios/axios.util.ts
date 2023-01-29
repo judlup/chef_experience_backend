@@ -22,7 +22,10 @@ export const makeRequest = async (
   const options = {
     method: method,
     url: url,
-    headers: { "Content-Type": "application/json", Authorization: token },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
     data: data,
   }
   const res = await axios.request(options)
