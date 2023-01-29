@@ -1,0 +1,55 @@
+version: '3.8'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  mysqldb:
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password    
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DATABASE
+    expose:
+      - $MYSQL_PORT
+    ports:
+      - $MYSQL_PORT:$MYSQL_PORT
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - app-tier
+  app:
+    depends_on:
+      - mysqldb
+    build: ./    
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $SERVER_PORT:$SERVER_PORT
+    environment:
+      - NODE_ENV=$NODE_ENV
+      - JWT_SECRET=$JWT_SECRET
+      - DB_HOST=$DB_HOST
+      - DB_PORT=$DB_PORT
+      - DB_USERNAME=$DB_USERNAME
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_NAME=$DB_NAME
+      - TEST_USERNAME=$TEST_USERNAME
+      - TEST_PASSWORD=$TEST_PASSWORD
+      - TEST_USER_ID=$TEST_USER_ID
+      - TEST_MEAL_ID=$TEST_MEAL_ID
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    networks:
+      - app-tier
+
+    stdin_open: true
+    tty: true
+
+volumes: 
+  db:
