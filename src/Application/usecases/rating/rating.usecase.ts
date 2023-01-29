@@ -1,4 +1,4 @@
-import { Meal } from "@/Domain/entities/meal/meal.entity"
+import { Rating } from "@/Domain/entities/rating/rating.entity"
 import { RatingRepositoryInterface } from "@/Domain/repositories/rating/rating.repository.interface"
 import { RatingUseCaseInterface } from "@/Domain/usecases/rating/rating.usecase"
 
@@ -9,7 +9,7 @@ export default class RatingUseCase implements RatingUseCaseInterface {
     userId: string,
     mealId: string,
     rating: number
-  ): Promise<Partial<Meal>> {
+  ): Promise<Partial<Rating>> {
     return this.ratingRepository.rating(userId, mealId, rating)
   }
 }

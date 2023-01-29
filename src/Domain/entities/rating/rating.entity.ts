@@ -2,6 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryColumn,
   PrimaryGeneratedColumn,
@@ -27,8 +28,7 @@ export class Rating {
   @JoinColumn()
   user!: User
 
-  @OneToOne(() => Meal)
-  @JoinColumn()
+  @ManyToOne(() => Meal, (meal) => meal.ratings)
   meal!: Meal
 
   toJSON() {
@@ -36,7 +36,6 @@ export class Rating {
       ...this,
       userId: undefined,
       mealId: undefined,
-      id: undefined,
     }
   }
 }

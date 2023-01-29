@@ -9,7 +9,7 @@ export default class RatingRepository implements RatingRepositoryInterface {
     userid: string,
     mealId: string,
     rating: number
-  ): Promise<Partial<Meal>> {
+  ): Promise<Partial<Rating>> {
     // Validate if the meal exists
     const getMeal = new Meal()
     getMeal.id = mealId
@@ -30,10 +30,10 @@ export default class RatingRepository implements RatingRepositoryInterface {
     newRating.userId = userid
     newRating.mealId = mealId
 
-    getMeal.addRating(newRating)
+    newRating.meal = getMeal
 
-    // Save the rating usign meal relationship many to many
-    let result = await dataSource.getRepository(Meal).save(getMeal)
+    // Save the rating
+    let result = await dataSource.getRepository(Rating).save(newRating)
 
     return result
   }

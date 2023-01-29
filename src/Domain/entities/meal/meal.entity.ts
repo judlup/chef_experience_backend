@@ -3,8 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm"
@@ -39,8 +38,7 @@ export class Meal implements MealInterface {
   @UpdateDateColumn()
   updatedAt!: Date
 
-  @ManyToMany(() => Rating, (rating) => rating.mealId, { cascade: true })
-  @JoinTable({ name: "ratings" })
+  @OneToMany(() => Rating, (rating) => rating.meal, { cascade: true })
   ratings!: Rating[]
 
   async addRating(rating: Rating) {
@@ -48,5 +46,24 @@ export class Meal implements MealInterface {
       this.ratings = new Array<Rating>()
     }
     this.ratings.push(rating)
+  }
+
+  // generate a function to calculate the average rating of the meal
+  getAverageRating() {
+    if (this.ratings.length == 0) {
+      return 0
+    }
+    let sum = 0
+    this.ratings.forEach((rating) => {
+      sum += rating.rating
+    })
+    return sum / this.ratings.length
+  }
+
+  toJSON() {
+    return {
+      ...this,
+      average: this.getAverageRating(),
+    }
   }
 }
