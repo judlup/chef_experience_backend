@@ -80,7 +80,7 @@ docker-compose up -d --build
 First, you need to start the server. To do this, run the following command:
 
 ```bash
-npm run dev or npm start
+npm run dev
 ```
 
 Then, you need to create a user and a meal in your local database, for this you need to use Insomnia Rest ([Download here](https://insomnia.rest/download)). In `resources` folder you can find the insomnia workspace called `chef_experience_backend_collection.json`, import it and using the `Users/Register User` request you cant create and user (_**it's important that the user role will be assigned like a chef, otherwise the restrictions doesn't allow this user create meals**_). Using the `Meals/Add Meal` request you can create a meal.

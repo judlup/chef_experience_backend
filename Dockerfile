@@ -16,4 +16,5 @@ RUN npm install --no-package-lock
 COPY . .
 
 EXPOSE 5000
-CMD npm start
+
+CMD npm run dev
