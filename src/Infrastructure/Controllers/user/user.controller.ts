@@ -1,4 +1,5 @@
 import DeleteUserUseCase from "@/Application/usecases/user/deleteuser.usecase"
+import GetChefsUseCase from "@/Application/usecases/user/getchefs.usecase"
 import GetUserUseCase from "@/Application/usecases/user/getuser.usecase"
 import GetUsersUseCase from "@/Application/usecases/user/getusers.usecase"
 import LoginUserUseCase from "@/Application/usecases/user/loginuser.usecase"
@@ -9,6 +10,8 @@ import { UserRole } from "@/Domain/enums/user/user.enum"
 import { UserInterface } from "@/Domain/interfaces/user/user.interface"
 import UserRepository from "@/Infrastructure/repositories/user/user.repository"
 import { Request, Response } from "express"
+import { ParamsDictionary } from "express-serve-static-core"
+import { ParsedQs } from "qs"
 import { StatusCode } from "status-code-enum"
 
 const userRepository = new UserRepository()
@@ -126,6 +129,28 @@ export default class UserController implements UserControllerInterface {
     } catch (err) {
       return res.status(StatusCode.ClientErrorBadRequest).json({
         message: "User or password incorrect",
+      })
+    }
+  }
+  async getChefs(
+    req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
+    res: Response<any, Record<string, any>>
+  ): Promise<Response<any, Record<string, any>>> {
+    const userAuth = req.body.userAuth
+    if (!userAuth.id) {
+      return res.status(StatusCode.ClientErrorForbidden).json({
+        message: "You are not authorized to get chefs",
+      })
+    }
+    const getCheefsUseCase = new GetChefsUseCase(userRepository)
+    try {
+      const chefs = await getCheefsUseCase.execute()
+      return res.status(StatusCode.SuccessOK).json({
+        data: chefs,
+      })
+    } catch (err) {
+      return res.status(StatusCode.ServerErrorInternal).json({
+        message: "Internal Server Error",
       })
     }
   }

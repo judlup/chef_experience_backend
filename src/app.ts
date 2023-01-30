@@ -1,6 +1,7 @@
 import mealRoutes from "@/Infrastructure/Routes/meal/meal.routes"
 import ratingRoutes from "@/Infrastructure/Routes/rating/rating.routes"
 import userRoutes from "@/Infrastructure/Routes/user/user.routes"
+import cors from "cors"
 import * as dotenv from "dotenv"
 import express, { Express } from "express"
 import morgan from "morgan"
@@ -12,6 +13,9 @@ const app: Express = express()
 
 /* Logging */
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"))
+/* enable cors */
+app.use(cors())
+
 /* Parse the request */
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())

@@ -6,6 +6,7 @@ const userController = new UserController()
 const userMiddleware = new UserMiddleware()
 
 router.get("/", userMiddleware.use, userController.getUsers)
+router.get("/chefs", userMiddleware.use, userController.getChefs)
 router.get("/:id", userMiddleware.use, userController.getUser)
 router.put("/:id", userMiddleware.use, userController.updateUser)
 router.delete("/:id", userMiddleware.use, userController.deleteUser)

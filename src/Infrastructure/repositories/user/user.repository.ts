@@ -1,4 +1,5 @@
 import { User } from "@/Domain/entities/user/user.entity"
+import { UserRole } from "@/Domain/enums/user/user.enum"
 import { UserInterface } from "@/Domain/interfaces/user/user.interface"
 import { UserRepositoryInterface } from "@/Domain/repositories/user/meal.repository.interface"
 import dataSource from "@/Infrastructure/database/mysql/mysql.config"
@@ -79,5 +80,13 @@ export default class UserRepository implements UserRepositoryInterface {
     const token = await jwtUtil.sign(user)
 
     return { token: token }
+  }
+
+  // get all chefs
+  async getChefs(): Promise<UserInterface[]> {
+    const users = await dataSource
+      .getRepository(User)
+      .find({ where: { role: UserRole.CHEF, status: true } })
+    return users
   }
 }

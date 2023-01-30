@@ -7,4 +7,5 @@ export interface UserControllerInterface {
   deleteUser(req: Request, res: Response): Promise<Response>
   registerUser(req: Request, res: Response): Promise<Response>
   loginUser(req: Request, res: Response): Promise<Response>
+  getChefs(req: Request, res: Response): Promise<Response>
 }
