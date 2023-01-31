@@ -3,11 +3,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm"
 import { Rating } from "../rating/rating.entity"
+import { User } from "../user/user.entity"
 
 @Entity()
 export class Meal implements MealInterface {
@@ -37,6 +40,10 @@ export class Meal implements MealInterface {
 
   @UpdateDateColumn()
   updatedAt!: Date
+
+  @OneToOne(() => User)
+  @JoinColumn()
+  user!: User
 
   @OneToMany(() => Rating, (rating) => rating.meal, { cascade: true })
   ratings!: Rating[]

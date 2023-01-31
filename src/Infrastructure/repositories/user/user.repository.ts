@@ -79,7 +79,7 @@ export default class UserRepository implements UserRepositoryInterface {
     const jwtUtil = new JwtUtil()
     const token = await jwtUtil.sign(user)
 
-    return { token: token }
+    return { token: token, id: user.id }
   }
 
   // get all chefs
