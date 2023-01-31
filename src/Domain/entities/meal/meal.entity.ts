@@ -50,6 +50,7 @@ export class Meal implements MealInterface {
 
   // generate a function to calculate the average rating of the meal
   getAverageRating() {
+    if (this.ratings == null) return 0
     if (this.ratings.length == 0) {
       return 0
     }

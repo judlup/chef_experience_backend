@@ -89,8 +89,8 @@ export default class MealController implements MealControllerInterface {
         })
       }
     }
-    const updateMealUseCase = new UpdateMealsUseCase(mealRepository)
     try {
+      const updateMealUseCase = new UpdateMealsUseCase(mealRepository)
       const updatedMeal = await updateMealUseCase.execute(mealId, meal)
       return res.status(StatusCode.SuccessOK).json({
         data: updatedMeal,
