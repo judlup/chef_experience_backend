@@ -4,8 +4,8 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm"
@@ -41,7 +41,7 @@ export class Meal implements MealInterface {
   @UpdateDateColumn()
   updatedAt!: Date
 
-  @OneToOne(() => User)
+  @ManyToOne(() => User)
   @JoinColumn()
   user!: User
 
